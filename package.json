@@ -19,6 +19,10 @@
     ],
     "author": "Takeshi Ueno",
     "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/utaani/node-red-contrib-coefont-text2speech/issues"
+    },
+    "homepage": "https://github.com/utaani/node-red-contrib-coefont-text2speech",
     "dependencies": {
         "crypto-js": "4.1.1"
     }
