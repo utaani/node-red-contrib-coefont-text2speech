@@ -7,10 +7,18 @@
             "": "subflow.js"
         }
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/utaani/node-red-contrib-coefont-text2speech.git"
+    },
     "keywords": [
         "node-red-nodegen",
-        "node-red"
+        "node-red",
+        "TTS",
+        "text-to-speech"
     ],
+    "author": "Takeshi Ueno",
+    "license": "Apache-2.0",
     "dependencies": {
         "crypto-js": "4.1.1"
     }
