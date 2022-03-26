@@ -1,0 +1,472 @@
+{
+	"id": "4008898c5f8d8781",
+	"type": "subflow",
+	"name": "CoeFont CloudTTS",
+	"info": "CoeFont API の[Text2speech](https://docs.coefont.cloud/#tag/Text2speech)を使って日本語文字列を音声Buffer(wav/mp3)に変換します。\n\n# 概要\nCoeFont API の[Text2speech](https://docs.coefont.cloud/#tag/Text2speech)を使って日本語文字列を音声Buffer(wav/mp3)に変換します。\n\nこのノードを利用するには、CoeFontの有償アカウント(Liteプラン以上)が必要です。また無料のCoeFontを使う場合にも、API経由の利用となりますのでアカウントのポイント残高を消費(1文字5pt～)します。ポイント残高にはご注意ください。\n\n# インストール\n```\nnpm i node-red-contrib-coefont-text2speech\n```\n\nもしくは、「パレットの管理」から導入してください\n\n# 利用方法\nプロパティウインドウでCoeFontのアクセスキー/シークレットキーと音声を生成したい文字列を指定することで、Buffer形式のWAVで音声が出力されます。\n[node-red-contib-play-audio](https://flows.nodered.org/node/node-red-contrib-play-audio)を使うことで、エディタ内で音声を再生することができます。\nInjectノードなどでmsg.payloadで文字列を入力することで、音声を生成することができます。\n\n## 入力パラメータ\n入力パラメータはノードプロパティで設定しますが、msgオブジェクトでも指定することができ、両方で指定された場合はmsgオブジェクトが優先されます。\n\n### 必須パラメータ\n - CoeFont AccessKey (msg.akey) : CoeFont のAccess Keyを指定。\n - CoeFont SecretKey (msg.skey) : CoeFont のClient Secretを指定。\n\nAccess KeyとClient Secretは、[CoeFont API情報](https://coefont.cloud/account/api) で生成してください。\n\n### オプションパラメータ\n - CoeFont ID (msg.cfid) : 音声変換を行うcoefontのID。coefont詳細画面のurlに表示される個別のuuidを参照。デフォルトは「[ミリアル(喜)](https://coefont.cloud/coefonts/9e0c2783-804c-4f77-81ab-1fbc70d15ffc)」。(無料音声ですが、1文字あたり5pt消費されます。\n - テキスト (msg.payload) : 生成する文章を指定。最大で1000文字指定できます。デフォルトは\"こんにちは\"。\n - スピード (msg.speed) : 音声の速度。1.0で通常速度。0.5で半速。2.0で2倍速。デフォルトは1.0。\n - ピッチ (msg.pitch) : 音声のピッチ。±1200で1オクターブ変化。デフォルトは0。\n - 句点 (msg.kuten) : 句点の間隔(秒)。デフォルトは0.7。\n - 読点 (msg.toten) : 読点の間隔(秒)。デフォルトは0.4。\n - 音量 (msg.volume) : 音量(倍)。デフォルトは1。\n - 抑揚 (msg.intonation) : 抑揚。デフォルトは1。\n - 音声フォーマット (msg.format) : 出力音声のフォーマット。\"wav\"か\"mp3\"を指定。 デフォルトは\"wav\"。\n\n## 出力\n - 音声Buffer出力 : node-red-contib-play-audio で再生できます。\n - 音声ファイルURL : このURLに対してhttp-requestノードを使ってHTTP GETすることで音声ファイルを取得できます。\n\n# その他\n生成された音声データは、 CoeFontの[サービス利用規約](https://coefont.cloud/termsOfUse)に従って利用してください。\n\nこのノードは、[node-red-nodegen](https://github.com/node-red/node-red-nodegen)で生成されました。\nまた、作成にあたっては、Qiitaの記事 [Node-REDでCoeFont CLOUD APIを使い高品質のTTSを試す](https://qiita.com/Y-Shikase/items/2d773dc4d970228437d5)を参考にさせていただきました。\n\n# LICENCE\nApache 2.0\n",
+	"category": "function",
+	"in": [
+		{
+			"x": 60,
+			"y": 80,
+			"wires": [
+				{
+					"id": "858f78ef9c731d83"
+				}
+			]
+		}
+	],
+	"out": [
+		{
+			"x": 1250,
+			"y": 80,
+			"wires": [
+				{
+					"id": "a39c60811f9ef854",
+					"port": 0
+				}
+			]
+		},
+		{
+			"x": 1250,
+			"y": 160,
+			"wires": [
+				{
+					"id": "8c77ad41b1fea08b",
+					"port": 0
+				}
+			]
+		}
+	],
+	"env": [
+		{
+			"name": "CFAKEY",
+			"type": "str",
+			"value": "",
+			"ui": {
+				"icon": "font-awesome/fa-key",
+				"label": {
+					"ja": "CoeFont AccessKey (msg.akey)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"str"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFSKEY",
+			"type": "cred",
+			"ui": {
+				"icon": "font-awesome/fa-key",
+				"label": {
+					"ja": "CoeFont SecretKey (msg.skey)"
+				}
+			}
+		},
+		{
+			"name": "CFID",
+			"type": "str",
+			"value": "9e0c2783-804c-4f77-81ab-1fbc70d15ffc",
+			"ui": {
+				"icon": "font-awesome/fa-address-book-o",
+				"label": {
+					"ja": "音声変換を行うcoefontのID。coefont詳細画面のurlに表示される個別のuuidを参照。(msg.cfid)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"str"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFTEXT",
+			"type": "str",
+			"value": "こんにちは",
+			"ui": {
+				"label": {
+					"ja": "話す文字列 (msg.payload)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"str"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFSPEED",
+			"type": "num",
+			"value": "1",
+			"ui": {
+				"icon": "font-awesome/fa-tachometer",
+				"label": {
+					"ja": "音声の速度。1.0で通常速度。0.5で半速。2.0で2倍速。(msg.speed)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFPITCH",
+			"type": "num",
+			"value": "0",
+			"ui": {
+				"icon": "font-awesome/fa-level-up",
+				"label": {
+					"ja": "音声のピッチ。±1200で1オクターブ変化。(msg.pitch)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFKUTEN",
+			"type": "num",
+			"value": "0.7",
+			"ui": {
+				"label": {
+					"ja": "句点の間隔(秒) (msg.kuten)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFTOTEN",
+			"type": "num",
+			"value": "0.4",
+			"ui": {
+				"label": {
+					"ja": "読点の間隔(秒) (msg.toten)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFVOL",
+			"type": "num",
+			"value": "1",
+			"ui": {
+				"label": {
+					"ja": "音量(倍) (msg.volume)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFINTONATION",
+			"type": "num",
+			"value": "1",
+			"ui": {
+				"label": {
+					"ja": "抑揚 (msg.intonation)"
+				},
+				"type": "input",
+				"opts": {
+					"types": [
+						"num"
+					]
+				}
+			}
+		},
+		{
+			"name": "CFFORMAT",
+			"type": "str",
+			"value": "wav",
+			"ui": {
+				"label": {
+					"ja": "音声ファイルのフォーマット \"wav\" / \"mp3\" (msg.format)"
+				},
+				"type": "select",
+				"opts": {
+					"opts": [
+						{
+							"l": {
+								"ja": "wav"
+							},
+							"v": "wav"
+						},
+						{
+							"l": {
+								"ja": "mp3"
+							},
+							"v": "mp3"
+						}
+					]
+				}
+			}
+		}
+	],
+	"meta": {
+		"module": "node-red-contrib-coefont-text2speech",
+		"version": "0.0.2",
+		"author": "utaani@ueno.org",
+		"desc": "CoeFont API 1.2.0をつかってText2speechします。",
+		"keywords": "CoeFont,TTS",
+		"license": "Apache-2.0"
+	},
+	"credentials": {
+		"CFSKEY": ""
+	},
+	"color": "#11b2c5",
+	"inputLabels": [
+		"入力テキスト"
+	],
+	"outputLabels": [
+		"Buffer WAV",
+		"Voice URL"
+	],
+	"icon": "font-awesome/fa-comments-o",
+	"status": {
+		"x": 1140,
+		"y": 320,
+		"wires": [
+			{
+				"id": "41b03a63d7892ce1",
+				"port": 0
+			},
+			{
+				"id": "87beed73cc030297",
+				"port": 0
+			},
+			{
+				"id": "730cb7ad345171af",
+				"port": 0
+			}
+		]
+	},
+	"flow": [
+		{
+			"id": "858f78ef9c731d83",
+			"type": "function",
+			"z": "4008898c5f8d8781",
+			"name": "APIリクエスト作成",
+			"func": "//const crypto = new global.get('crypto');\n\nconst text = msg.payload ? msg.payload : env.get(\"CFTEXT\");\nconst akey = msg.akey ? msg.akey : env.get(\"CFAKEY\");\nconst skey = msg.skey ? msg.skey : env.get(\"CFSKEY\");\nconst cfid = msg.cfid ? msg.cfid : env.get(\"CFID\");\nconst speed = msg.speed ? msg.speed : env.get(\"CFSPEED\");\nconst pitch = msg.pitch ? msg.pitch : env.get(\"CFPITCH\");\nconst kuten = msg.kuten ? msg.kuten : env.get(\"CFKUTEN\");\nconst toten = msg.toten ? msg.toten : env.get(\"CFTOTEN\");\nconst volume = msg.volume ? msg.volume : env.get(\"CFVOL\");\nconst intonation = msg.intonation ? msg.intonation : env.get(\"CFINTONATION\");\nconst format = msg.format ? msg.format : env.get(\"CFFORMAT\");\n\nconst data = {\n  'coefont': cfid,\n  'text': text,\n  'speed': speed,\n  'pitch': pitch,\n  'kuten': kuten,\n  'toten': toten,\n  'volume': volume,\n  'intonation': intonation,\n  'format':format\n};\n\nconst dataj = JSON.stringify(data);\nconst date = String(Math.floor(Date.now() / 1000));\n\nconst signature = crypto.createHmac('sha256', skey).update(date+dataj).digest('hex');\nmsg.headers = {\n  'Content-Type': 'application/json',\n  'Authorization': akey,\n  'X-Coefont-Date': date,\n  'X-Coefont-Content': signature\n};\nmsg.url = 'https://api.coefont.cloud/v1/text2speech';\nmsg.method = 'POST';\nmsg.payload = data;\n\nreturn msg;",
+			"outputs": 1,
+			"noerr": 0,
+			"initialize": "",
+			"finalize": "",
+			"libs": [
+				{
+					"var": "crypto",
+					"module": "crypto"
+				}
+			],
+			"x": 230,
+			"y": 80,
+			"wires": [
+				[
+					"9d2d574b58e80aef",
+					"41b03a63d7892ce1"
+				]
+			]
+		},
+		{
+			"id": "9d2d574b58e80aef",
+			"type": "http request",
+			"z": "4008898c5f8d8781",
+			"name": "音声生成API",
+			"method": "use",
+			"ret": "txt",
+			"paytoqs": "ignore",
+			"url": "",
+			"tls": "",
+			"persist": false,
+			"proxy": "",
+			"authType": "",
+			"senderr": false,
+			"x": 450,
+			"y": 80,
+			"wires": [
+				[
+					"1a20dc4c1051805d"
+				]
+			]
+		},
+		{
+			"id": "1a20dc4c1051805d",
+			"type": "change",
+			"z": "4008898c5f8d8781",
+			"name": "音声データURL",
+			"rules": [
+				{
+					"t": "set",
+					"p": "url",
+					"pt": "msg",
+					"to": "redirectList[0].location",
+					"tot": "msg"
+				},
+				{
+					"t": "set",
+					"p": "method",
+					"pt": "msg",
+					"to": "GET",
+					"tot": "str"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 660,
+			"y": 80,
+			"wires": [
+				[
+					"a39c60811f9ef854",
+					"8c77ad41b1fea08b",
+					"87beed73cc030297"
+				]
+			]
+		},
+		{
+			"id": "a39c60811f9ef854",
+			"type": "http request",
+			"z": "4008898c5f8d8781",
+			"name": "音声取得",
+			"method": "use",
+			"ret": "bin",
+			"paytoqs": "ignore",
+			"url": "",
+			"tls": "",
+			"persist": false,
+			"proxy": "",
+			"authType": "",
+			"senderr": false,
+			"x": 880,
+			"y": 80,
+			"wires": [
+				[
+					"730cb7ad345171af"
+				]
+			]
+		},
+		{
+			"id": "8c77ad41b1fea08b",
+			"type": "change",
+			"z": "4008898c5f8d8781",
+			"name": "",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "url",
+					"tot": "msg"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 900,
+			"y": 160,
+			"wires": [
+				[]
+			]
+		},
+		{
+			"id": "41b03a63d7892ce1",
+			"type": "change",
+			"z": "4008898c5f8d8781",
+			"name": "生成中...",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "生成中...",
+					"tot": "str"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 880,
+			"y": 320,
+			"wires": [
+				[]
+			]
+		},
+		{
+			"id": "87beed73cc030297",
+			"type": "change",
+			"z": "4008898c5f8d8781",
+			"name": "音声取得中...",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "音声取得中...",
+					"tot": "str"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 890,
+			"y": 260,
+			"wires": [
+				[]
+			]
+		},
+		{
+			"id": "730cb7ad345171af",
+			"type": "change",
+			"z": "4008898c5f8d8781",
+			"name": "終了",
+			"rules": [
+				{
+					"t": "set",
+					"p": "payload",
+					"pt": "msg",
+					"to": "",
+					"tot": "str"
+				}
+			],
+			"action": "",
+			"property": "",
+			"from": "",
+			"to": "",
+			"reg": false,
+			"x": 870,
+			"y": 220,
+			"wires": [
+				[]
+			]
+		}
+	]
+}
