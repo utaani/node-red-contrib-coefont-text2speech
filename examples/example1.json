@@ -1,0 +1,76 @@
+[
+    {
+        "id": "bd9958b3ba7d68af",
+        "type": "sf:4008898c5f8d8781",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "CFAKEY": "",
+        "CFSKEY": "",
+        "CFID": "9e0c2783-804c-4f77-81ab-1fbc70d15ffc",
+        "CFTEXT": "こんにちは",
+        "CFSPEED": 1,
+        "CFPITCH": 0,
+        "CFKUTEN": 0.7,
+        "CFTOTEN": 0.4,
+        "CFVOL": 1,
+        "CFINTONATION": 1,
+        "CFFORMAT": "wav",
+        "x": 550,
+        "y": 200,
+        "wires": [
+            [
+                "46097d0632e8d809"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "46097d0632e8d809",
+        "type": "play audio",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "voice": "",
+        "x": 910,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c880214a19f7fea7",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "日本語文字列を設定",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "このフローは、CoeFontを使って日本語文字列を音声に変換します。",
+        "payloadType": "str",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "bd9958b3ba7d68af"
+            ]
+        ]
+    },
+    {
+        "id": "d63fe21212e09044",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "AccessKey/SecretKeyの入力が必要",
+        "info": "",
+        "x": 610,
+        "y": 160,
+        "wires": []
+    }
+]
