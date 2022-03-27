@@ -10,7 +10,8 @@ CoeFont API の[Text2speech](https://docs.coefont.cloud/#tag/Text2speech)を使�
 npm i node-red-contrib-coefont-text2speech
 ```
 
-もしくは、「パレットの管理」から導入してください
+もしくは、「パレットの管理」から導入してください。（導入後、パレットに反映されない場合は一度ブラウザのリロードをお願いします）
+※なお、Node-RED 2.0.0以降でないと動作しないようです。
 
 # 利用方法
 プロパティウインドウでCoeFontのアクセスキー/シークレットキーと音声を生成したい文字列を指定することで、Buffer形式のWAVで音声が出力されます。
@@ -46,6 +47,10 @@ Access KeyとClient Secretは、[CoeFont API情報](https://coefont.cloud/accoun
 
 このノードは、[node-red-nodegen](https://github.com/node-red/node-red-nodegen)で生成されました。
 また、作成にあたっては、Qiitaの記事 [Node-REDでCoeFont CLOUD APIを使い高品質のTTSを試す](https://qiita.com/Y-Shikase/items/2d773dc4d970228437d5)を参考にさせていただきました。
+
+# 既知の不具合
+ - ノードパレットに導入した際、リロードしないと反映しない
+ - 導入時、ノードの名前が正しく反映されない。(「sf.4008898c5f8d8781」となる。node-red-nodegenの仕様かもしれません。）
 
 # LICENCE
 Apache 2.0
