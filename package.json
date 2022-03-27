@@ -1,15 +1,12 @@
 {
     "name": "node-red-contrib-coefont-text2speech",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Node-RED node for CoeFont textspeech API",
     "node-red": {
         "version": ">=2.0.0",
         "nodes": {
-            "": "subflow.js"
+            "coefont-text2speech": "subflow.js"
         }
-    },
-    "engines": {
-        "node": ">=12.0.0"
     },
     "repository": {
         "type": "git",
@@ -19,6 +16,7 @@
         "node-red-nodegen",
         "node-red",
         "TTS",
+        "CoeFont",
         "text-to-speech"
     ],
     "author": "Takeshi Ueno",
@@ -27,6 +25,9 @@
         "url": "https://github.com/utaani/node-red-contrib-coefont-text2speech/issues"
     },
     "homepage": "https://github.com/utaani/node-red-contrib-coefont-text2speech",
+    "engines": {
+        "node": ">=12.0.0"
+    },
     "dependencies": {
         "crypto-js": "4.1.1"
     }
