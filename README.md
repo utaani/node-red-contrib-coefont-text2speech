@@ -18,6 +18,9 @@ npm i node-red-contrib-coefont-text2speech
 [node-red-contib-play-audio](https://flows.nodered.org/node/node-red-contrib-play-audio)を使うことで、エディタ内で音声を再生することができます。
 Injectノードなどでmsg.payloadで文字列を入力することで、音声を生成することができます。
 
+![image](https://user-images.githubusercontent.com/17796/160324383-4716e6b0-3c6f-4752-bfeb-fc717f038642.png)
+
+
 ## 入力パラメータ
 入力パラメータはノードプロパティで設定しますが、msgオブジェクトでも指定することができ、両方で指定された場合はmsgオブジェクトが優先されます。
 
