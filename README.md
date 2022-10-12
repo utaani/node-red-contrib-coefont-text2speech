@@ -3,6 +3,8 @@ CoeFont API の[Text2speech](https://docs.coefont.cloud/#tag/Text2speech)を使�
 # 概要
 CoeFont API の[Text2speech](https://docs.coefont.cloud/#tag/Text2speech)を使って日本語文字列を音声Buffer(wav/mp3)に変換します。
 
+[2022年7月より、LiteプランでのAPI利用ができなくなり](https://prtimes.jp/main/html/rd/p/000000024.000078329.html) 、作者はこのノードをメンテナンスできないので、一定期間後にアーカイブにします。大変残念です。
+
 このノードを利用するには、CoeFontの有償アカウント(Liteプラン以上)が必要です。また無料のCoeFontを使う場合にも、API経由の利用となりますのでアカウントのポイント残高を消費(1文字5pt～)します。ポイント残高にはご注意ください。
 
 # インストール
